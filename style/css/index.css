@@ -1,7 +1,19 @@
+@charset"utf-8";
+*{margin:0px;padding:0px;list-style:none;font-family:"microsoft yahei";}
+img{border:0px;}
+a{text-decoration:none;}
 /*top begin*/
 .top{width:100%;min-width:1180px;background:#ddd;height:150px;}
 .top .top_con{width:1180px;margin:0 auto;}
-.top .top_con .top_con_left{float:left; width:330px;}
+.top .top_con .top_con_left{float:left; width:330px;background:url("../images/bor.jpg")no-repeat right;}
+.top .top_con .top_con_left img{display:block;}
+.top .top_con .top_con_right{overflow:hidden;position:relative;letter-spacing:5px;float:right;width:800px;height:150px;font-family:"microsoft yahei";font-size:20px;}
+.top .top_con .top_con_right p{position:absolute;opacity:0;color:#404040;}
+.top .top_con .top_con_right p.pinf{left:0px;top:-5px;}
+.top .top_con .top_con_right p.jiaz{right:200px;top:64px;}
+.top .top_con .top_con_right p.bulang{right:300px;top:105px;color:#c91b46;}
+.top .top_con .top_con_right b{display:block;float:right;padding:0px 10px 20px;background:#fff;border-radius:3px;box-shadow:0 0 15px #ffff80;margin-right:15px;}
+.top .top_con .top_con_right img{display:block;}
 /*top end*/
 
 /*con start*/
