@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>偶遇</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style0.css" />
+  </head>
+
+  <body>
+    <!-- 荧光S -->
+    <div class="container">
+      <!-- 打字 -->
+      <div class="typing">
+        <!-- 字幕 -->
+        <h2 class="header-sub-title" id="word"></h2>
+        <h2 class="header-sub-title blink">|</h2>
+      </div>
+      <audio id="mymusic" controls autoplay><source src="xiaojiuwo.mp3" /></audio>
+      <!-- 相册 -->
+      <div class="box">
+        <ul class="minbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <ol class="maxbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/mymusic.js"></script>
+
+    <script>
+      /* 兼容H5 手机端 */
+      if (
+        navigator.userAgent.match(
+          /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        )
+      ) {
+        var box = document.querySelectorAll(".box")[0];
+        console.log(box, "移动端");
+        box.style.left = "42%";
+      }
+      // --------------------打印字 S--------------------------
+      const words = [
+        "❤ 2015年6月-12月, 高三上",
+        "❤ 这一学期中的周末都是与小赵\"偶遇\"的周末",
+        "❤ 大概在我妈妈的视角下, 每个周末的下午三点半",
+        "❤ 我总是缺了这个少了那个, 然后下去买东西, 嘿嘿",
+        "❤ 蹲点 -> 偶遇 -> 楼下饰品店or书店 -> 送回家",
+        "❤ 每个放假的周末也随之有了期待",
+        "❤ 不过我还是喜欢上学",
+        "❤ 有小赵的课堂, 又哪里会有什么厌学呢",
+        "❤ 见证了小赵的每一件羽绒服, 好家伙, 样式还挺多",
+      ];
+      let PPP = 0;
+      let timer;
+      // speed in ms
+      let deleteDelay = 3000;
+      let typeSpeed = 100;
+      let delSpeed = 50;
+      /* 开始编写文字 */
+      function typingEffect() {
+        console.log(i, "iiii");
+        console.log(words[PPP], "words[i]");
+        let word = words[PPP].split("");
+        var loopTyping = function () {
+          if (word.length > 0) {
+            document.getElementById("word").innerHTML += word.shift();
+          } else {
+            delay(function () {
+              deletingEffect(); // do stuff
+            }, deleteDelay); // end delay
+            // deletingEffect();
+            return false;
+          }
+          timer = setTimeout(loopTyping, typeSpeed);
+        };
+        loopTyping();
+      }
+
+      function deletingEffect() {
+        let word = words[PPP].split("");
+        var loopDeleting = function () {
+          if (word.length > 0) {
+            word.pop();
+            document.getElementById("word").innerHTML = word.join("");
+          } else {
+            if (words.length > PPP + 1) {
+              PPP++;
+            } else {
+              PPP = 0;
+            }
+            typingEffect();
+            return false;
+          }
+
+          timer = setTimeout(loopDeleting, delSpeed);
+        };
+
+        loopDeleting();
+      }
+
+      var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+          clearTimeout(timer);
+          timer = setTimeout(callback, ms);
+        };
+      })();
+      typingEffect();
+      // --------------------打印字 E--------------------------
+    </script>
+  </body>
+</html>
