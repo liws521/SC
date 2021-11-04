@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <title>SC</title>
+
     <link type="text/css" rel="stylesheet" href="style/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="style/css/wall.css" />
 	<!--云标签-->
     <link type="text/css" rel="stylesheet" href="style/css/cloudLabel.css" />
 </head>
@@ -12,10 +14,19 @@
         abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
             margin: 0;
             padding: 0;
-            cursor: url('style/images/bb.ico'),auto;
+            cursor: url('style/images/shubiao2.ico'),auto;
         }
     </style>
 <!--top begin-->
+    <!-- 荧光S -->
+    <audio controls autoplay><source src="mp3/app.mp3" /></audio>
+    <!-- 背景图 -->
+    <div id="background" class="wall"></div>
+    <!-- 荧光点 -->
+    <div id="midground" class="wall"></div>
+    <div id="foreground" class="wall"></div>
+    <div id="top" class="wall"></div>
+    <!-- 荧光E -->
 <div class="top">
     <div class="top_con">
         <div class="top_con_left"></div>
@@ -153,7 +164,7 @@
 <script type="text/javascript" src="style/js/jquery.js"></script>
 <script type="text/javascript" src="style/js/my.js"></script>
 <!--云标签-->
-<script src="style/js/cloudLable.js" type="text/javascript"></script>
+<script type="text/javascript" src="style/js/cloudLable.js"></script>
 
 <script type="text/javascript" src="style/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="style/js/jquery.timelinr-0.9.7.js"></script>

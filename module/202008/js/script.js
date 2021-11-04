@@ -865,7 +865,7 @@ shape.init();
 shape.print("❤ ");
 
 /* 只需要修改这里的文字就行 */
-let arr = ["2021","五一","园博园"];
+let arr = ["2020","苏州","宜家"];
 let i = -1;
 let time = setInterval(() => {
   if (i != arr.length - 1) {

@@ -31,11 +31,7 @@ audio:hover {
 }
 
 div#background {
-  /* background: url("../../bgimg/bg8.jpg") no-repeat; */
   background: url("../../bgimg/bg2.jpg") no-repeat;
-  /* background: url("../bgimg/bg01.webp") ; */
-  /* background: url("../bgimg/bg9.jpg") no-repeat; */
-  /* background: url("../bgimg/bg3.jpg") no-repeat; */
   -webkit-animation: dd 100s linear infinite;
   -moz-animation: dd 100s linear infinite;
   -o-animation: dd 100s linear infinite;

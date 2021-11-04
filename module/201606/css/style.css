@@ -20,20 +20,26 @@ li {
 }
 
 .box {
-  z-index: 999999 !important;
-  width: 200px;
-  height: 200px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  position: fixed !important;
-  top: 42%;
-  left: 40%;
-  -webkit-transform-style: preserve-3d;
-  -webkit-transform: rotateX(13deg);
-  -webkit-animation: move 5s linear infinite;
+    /* z-index https://www.w3school.com.cn/cssref/pr_pos_z-index.asp */
+    z-index: 999999 !important;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* 背景不随其余部分滚动 */
+    background-attachment: fixed;
+    background-size: 100% 100%;
+
+    position: fixed !important;
+    top: 42%;
+    left: 40%;
+
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: rotateX(13deg);
+    -webkit-animation: move 5s linear infinite;
 }
+
+/* 内层minbox */
 .minbox {
   width: 100px;
   height: 100px;
