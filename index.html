@@ -2,214 +2,424 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>SC</title>
-
-    <link type="text/css" rel="stylesheet" href="style/css/index.css" />
-    <link type="text/css" rel="stylesheet" href="style/css/wall.css" />
-	<!--云标签-->
-    <link type="text/css" rel="stylesheet" href="style/css/cloudLabel.css" />
-</head>
-<body>
-  	<style>
-        abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
-            margin: 0;
-            padding: 0;
-            cursor: url('style/images/shubiao2.ico'),auto;
+    <script src="style/js/jquery.min.js" ></script>
+    <!-- <script
+      id="jqbb"
+      src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"
+    ></script> -->
+    <!-- 音乐播放器css -->
+    <link rel="stylesheet" href="style/css/music.css" />
+    <link rel="stylesheet" href="style/css/cloudLabel.css" />
+    <style type="text/css">
+        html,
+        body {
+        margin: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        cursor: none;
+        /* 设置背景的渐变色 */
+        background: linear-gradient(to bottom, #000000 0%, #5788fe 100%);
         }
-    </style>
-<!--top begin-->
-    <!-- 荧光S -->
-    <audio controls autoplay><source src="mp3/app.mp3" /></audio>
-    <!-- 背景图 -->
-    <div id="background" class="wall"></div>
-    <!-- 荧光点 -->
-    <div id="midground" class="wall"></div>
-    <div id="foreground" class="wall"></div>
-    <div id="top" class="wall"></div>
-    <!-- 荧光E -->
-<div class="top">
-    <div class="top_con">
-        <div class="top_con_left"></div>
-        <div class="top_con_right">
-                <p class="pinf">有关时间长河</p>
-                <p class="jiaz">有关我和你</p>
-                <p class="bulang">----SC</p>
+
+        /* 为背景添加红色滤镜 */
+        .filter {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #fe5757;
+        animation: colorChange 30s ease-in-out infinite;
+        animation-fill-mode: both;
+        mix-blend-mode: overlay;
+        }
+
+        @keyframes colorChange {
+        0%,
+        100% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.9;
+        }
+        }
+
+        .landscape {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("style/images/xkbg.png");
+        background-size: 1000px 250px;
+        background-repeat: repeat-x;
+        background-position: center bottom;
+        }
+        
+        /* 红雪花颜色 */
+        .maple {
+        position: absolute;
+        top: 0;
+        color: hsl(350, 100%, 88%);
+        }
+    </style>\
+    <!-- 图片+调用插件形成白色雪花 -->
+    <script type="text/javascript" src="style/js/christmassnow.js"></script>
+    <script>
+        $(document).ready(function () {
+        $("body").christmassnow({
+            snowflaketype: 23, // 1 to 25 types of flakes are available change the number from 1 to 25. each one contain different images.
+            snowflakesize: 2, //snowflakesize is 1 then it get the size of the image as random , if the snowflakesize is 2 means size of the image as custom
+            snowflakedirection: 1, // 1 means default no wind (top to bottom), 2 means random, 3 means left to right and 4 means  right to left
+            snownumberofflakes: 4, // number of flakes is user option
+            snowflakespeed: 10, // falling speed of flake 10 sec is default
+            flakeheightandwidth: 15, // if you are mention that option flakesize is 2 then this flakeheightandwidth should work values are in pixels 16*16.
+        });
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- 红色雪飘落 -->
+    <div class="maplebg"></div>
+    <script>
+        var d = "<div class='maple'>❄<div>";
+        setInterval(function () {
+        var f = $(document).width();
+        // Math.random() return a float number in [0, 1)
+        var e = Math.random() * f - 300; // 雪花的定位left值
+        var o = 0.2 + Math.random(); // 雪花的透明度
+        var fon = 25 + Math.random() * 10; // 雪花大小
+        var l = e - 100 + 200 * Math.random(); // 雪花的横向位移
+        var k = 8000 + 5000 * Math.random();
+        var deg = Math.random() * 360; // 雪花的方向
+        // appendTo() https://www.w3school.com.cn/jquery/manipulation_appendto.asp
+        // animate() https://www.w3school.com.cn/jquery/effect_animate.asp
+        $(d)
+            .clone()
+            .appendTo(".maplebg")
+            .css({
+            left: e + "px",
+            opacity: o,
+            transform: "rotate(" + deg + "deg)",
+            "font-size": fon,
+            })
+            .animate(
+            {
+                top: "550px",
+                left: l + "px",
+                opacity: 0.1,
+            },
+            k,
+            "linear",
+            function () {
+                $(this).remove();
+            }
+            );
+        }, 500);
+    </script>
+
+    <!-- 白雪花飘落 -->
+    <div class="drop"></div>
+
+    <!-- 星空 -->
+    <div class="landscape"></div>
+    <div class="filter"></div>
+    <canvas id="canvas"></canvas>
+
+    <!-- 播放器 -->
+    <div id="app">
+        <div class="container_player">
+        <div class="music-box">
+            <!-- <img src="images/avatar.jpg" /> -->
+            <img src="img/01.png" />
+            <div class="mask">
+            <div class="mplayer" onclick="play()">
+                <i class="fa">
+                <span class="before"></span>
+                <span class="after"> </span>
+                </i>
+                <svg
+                class="loadingSvg"
+                width="25"
+                height="25"
+                viewBox="0,0,50,50"
+                style="
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                "
+                >
+                <circle></circle>
+                </svg>
+            </div>
+            <div class="m-circle m-progress">
+                <svg width="163" height="163" viewBox="0,0,163,163">
+                <circle
+                    cx="81"
+                    cy="81"
+                    r="159"
+                    stroke-width="8"
+                    stroke="rgba(255, 206, 113, 0.2)"
+                    fill="rgba(0,0,0,.2)"
+                ></circle>
+                <circle
+                    class="a"
+                    cx="81"
+                    cy="81"
+                    r="159"
+                    stroke-width="6"
+                    stroke="rgba(255, 206, 113, 1)"
+                    fill="none"
+                    stroke-dasharray="0 999"
+                    transform="matrix(0,-1,1,0,0,163)"
+                ></circle>
+                </svg>
+            </div>
+            <div class="m_time">
+                <span class="mplayer_curtime">00:00</span>
+                <span class="m-join">/</span>
+                <span class="mplayer_durtime">00:00</span>
+            </div>
+            </div>
+        </div>
         </div>
     </div>
-</div>
-<!--top end-->
-<!--con begin-->
-<div class="con">
+    <!-- 音乐 -->
+    <audio id="myAudio" src="style/mp3/yinyue.mp3" autoplay></audio>
 
-	<!--nav start-->
-	<div class="nav">
-		<div class="nav_t"></div>
-		<div class="nav_c">
-			<ul>
-				<li><a href="./index.html" class="on">首页</a></li>
-				<li><a href="module/HappyBirthday/index.html" target="_blank" >HappyBirthday</a></li>
-				<li><a href="module/ttdhy/index.html" target="_blank" >Wall</a></li>
-			</ul>
-		</div>
-	</div>
-	<!--nav end-->
-
-	<!--banner start-->
-	<div class="banner_left">
-		<div class="banner_left_left">
-			<ul>
-				<li style="display:block;"><img src="style/images/1.jpg"></li>
-				<li><img src="style/images/2.jpg"></li>
-				<li><img src="style/images/3.jpg"></li>
-				<li><img src="style/images/4.jpg"></li>
-			</ul>
-		</div>
-		<div class="banner_left_right">
-			<div class="hover"><img src="style/images/hover.png"/></div>
-			<ul>
-				<li><img src="style/images/01.jpg"></li>
-				<li><img src="style/images/02.jpg"></li>
-				<li><img src="style/images/03.jpg"></li>
-				<li><img src="style/images/04.jpg"></li>
-			<ul>
-		</div>
-	</div>
-	<div class="banner_right">
-		<!--云标签-->
-		<div class="iM-right-content">
-			<div id="tagsList">
-				<!--高中-->
-				<a href="album/gaoer.html" >高二</a>
-				<a href="module/ttdhy/index.html">嘘~我们来偷偷地合影</a>
-				<a href="module/ouyu/index.html">偶遇</a>
-				<a href="module/201512/index.html" >2015年的最后一天</a>
-				<!--2016-->
-				<a href="module/201606/index.html">我们高考啦</a>
-				<a href="album/201610.html" >壹陆我拾忆</a>
-				<a href="album/201612.html" >来约一场你的名字吧</a>
-				<!--2017-->
-				<a href="album/201704.html">壹柒过清明</a>
-				<a href="album/201705.html">壹柒的吾忆</a>
-				<!--2018-->
-				<a href="module/201808/index2.html" >人在囧途</a>
-				<a href="module/201810/index.html" >时间煮雨</a>
-				<!--2019-->
-				<a href="album/201904.html" >固城湖水漫城</a>
-				<a href="album/201909.html" >常州恐龙园</a>
-				<!--2020-->
-				<a href="" >下次苏州见</a>
-				<a href="module/202008/index.html" target="_blank" >宜家&苏州</a>
-				<!--2021-->
-				<a href="module/202105/index.html" target="_blank" >园博园</a>
-				<!--others-->
-				<a href="module/HappyBirthday/index.html">HappyBirthday</a>
-				<a href="module/longlongago/index.html">long-long-ago</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- timeline -->
-<div id="timeline">
-	<ul id="dates">
-		<li><a href="#">2014</a></li>
-		<li><a href="#">2015</a></li>
-		<li><a href="#">2016</a></li>
-		<li><a href="#">2017</a></li>
-		<li><a href="#">2018</a></li>
-		<li><a href="#">2019</a></li>
-		<li><a href="#">2020</a></li>
-		<li><a href="#">2021</a></li>
-	</ul>
-	<ul id="issues">
-		<li id="date1">
-			<p>时间节点内容1.</p>
-			
-		</li>
-		<li id="date2">
-			<p>时间节点内容2.</p>
-			<p><image src="images/2.png" /></p>
-		</li>
-		<li id="date3">
-			<p>时间节点内容3.</p>
-			<p><image src="images/3.png" /></p>
-			<a href="module/201606/index.html">我们高考啦</a>
-		</li>
-		<li id="date4">
-			<p>时间节点内容4.</p>
-			<p><image src="images/4.png" /></p>
-		</li>
-		<li id="date5">
-			<a href="module/201808/index2.html" target="_blank" >人在囧途</a>
-			<a href="module/201810/index.html" target="_blank" >时间煮雨</a>
-		</li>
-		<li id="date6">
-			<p>时间节点内容6.</p>
-			<p><image src="images/6.png" /></p>
-		</li>
-		<li id="date7">
-			<p>时间节点内容7.</p>
-			<a href="module/202008/index.html" target="_blank" >宜家&苏州</a>
-			<p><image src="images/7.png" /></p>
-		</li>
-		<li id="date8">
-			<p>时间节点内容8.</p>
-			<a href="module/202105/index.html" target="_blank" >园博园</a>
-		</li>
-	</ul>
-	<a href="#" id="next">+</a>  <a href="#" id="prev">-</a>
-	
-</div>
-
-<script type="text/javascript" src="style/js/jquery.js"></script>
-<script type="text/javascript" src="style/js/my.js"></script>
-<!--云标签-->
-<script type="text/javascript" src="style/js/cloudLable.js"></script>
-
-<script type="text/javascript" src="style/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="style/js/jquery.timelinr-0.9.7.js"></script>
-<script type="text/javascript">
-
-$(function(){
-	$(function(){
-		$("#timel").timelinr({
-			orientation: 'horizontal',
-			// value: horizontal | vertical, default to horizontal
-			containerDiv: '#timeline',
-			// value: any HTML tag or #id, default to #timeline
-			datesDiv: '#dates',
-			// value: any HTML tag or #id, default to #dates
-			datesSelectedClass: 'selected',
-			// value: any class, default to selected
-			datesSpeed: 'normal',
-			// value: integer between 100 and 1000 (recommended) or 'slow', 'normal' or 'fast'; default to normal
-			issuesDiv : '#issues',
-			// value: any HTML tag or #id, default to #issues
-			issuesSelectedClass: 'selected',
-			// value: any class, default to selected
-			issuesSpeed: 'fast',
-			// value: integer between 100 and 1000 (recommended) or 'slow', 'normal' or 'fast'; default to fast
-			issuesTransparency: 0.2,
-			// value: integer between 0 and 1 (recommended), default to 0.2
-			issuesTransparencySpeed: 500,
-			// value: integer between 100 and 1000 (recommended), default to 500 (normal)
-			prevButton: '#prev',
-			// value: any HTML tag or #id, default to #prev
-			nextButton: '#next',
-			// value: any HTML tag or #id, default to #next
-			arrowKeys: 'false',
-			// value: true/false, default to false
-			startAt: 1,
-			// value: integer, default to 1 (first)
-			autoPlay: 'true',
-			// value: true | false, default to false
-			autoPlayDirection: 'forward',
-			// value: forward | backward, default to forward
-			autoPlayPause: 2000
-			// value: integer (1000 = 1 seg), default to 2000 (2segs)< 
-		});
-	});
-});
-</script>
+    <div id="tagsList">
+        <!--高中-->
+        <a href="module/ttdhy/index.html" target="_blank" >嘘~我们来偷偷地合影</a>
+        <a href="module/ouyu/index.html" target="_blank" >偶遇</a>
+        <a href="module/201512/index.html" target="_blank" >2015年的最后一天</a>
+        <!--2016-->
+        <a href="module/201606/index.html" target="_blank" >我们高考啦</a>
+        <a href="module/201610/index.html" target="_blank" >壹陆我拾忆</a>
+        <a href="module/201612/index.html" target="_blank" >来约一场你的名字吧</a>
+        <!--2017-->
+        <a href="module/201704/index.html" target="_blank" >壹柒过清明</a>
+        <a href="module/201705/index.html" target="_blank" >壹柒的吾忆</a>
+        <!--2018-->
+        <a href="module/201808/index.html" target="_blank" >人在囧途</a>
+        <a href="module/201810/index.html" target="_blank" >时间煮雨</a>
+        <!--2019-->
+        <a href="module/201904/index.html" target="_blank" >固城湖水漫城</a>
+        <a href="module/201909/index.html" target="_blank" >常州恐龙园</a>
+        <!--2020-->
+        <a href="module/202007/index.html" target="_blank" >下次苏州见</a>
+        <a href="module/202008/index.html" target="_blank" >宜家&苏州</a>
+        <!--2021-->
+        <a href="module/202105/index.html" target="_blank" >园博园</a>
+        <!--others-->
+        <a href="module/HappyBirthday/index.html" target="_blank" >HappyBirthday</a>
+        <a href="module/longlongago/index.html" target="_blank" >long-long-ago</a>
+    </div>
 </body>
+
+<!-- 利用canvse画向上运动的小星星, 和鼠标连线效果 -->
+<script>
+    // 天空中的小星星, 类与对象
+    function Star(id, x, y){
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.r = Math.floor(Math.random() * 2) + 1;
+        var alpha = (Math.floor(Math.random() * 10) + 1) / 10 / 2;
+        this.color = "rgba(255,255,255," + alpha + ")";
+    }
+
+    // 利用原型对象可以给对象添加新的属性和方法
+    Star.prototype.draw = function(){
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = this.r * 2;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    };
+
+    Star.prototype.move = function () {
+        this.y -= 0.15;
+        if (this.y <= -10) this.y = HEIGHT + 10;
+        this.draw();
+    };
+
+    Star.prototype.die = function () {
+        stars[this.id] = null;
+        delete stars[this.id];
+    };
+
+    function Dot(id, x, y, r) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.r = Math.floor(Math.random() * 5) + 1;
+        this.maxLinks = 2;
+        this.speed = 0.5;
+        this.a = 0.5;
+        this.aReduction = 0.005;
+        this.color = "rgba(255,255,255," + this.a + ")";
+        this.linkColor = "rgba(255,255,255," + this.a / 4 + ")";
+
+        this.dir = Math.floor(Math.random() * 140) + 200;
+    }
+
+    Dot.prototype.draw = function () {
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = this.r * 2;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    };
+
+    Dot.prototype.link = function () {
+        if (this.id == 0) return;
+        var previousDot1 = getPreviousDot(this.id, 1);
+        var previousDot2 = getPreviousDot(this.id, 2);
+        var previousDot3 = getPreviousDot(this.id, 3);
+        if (!previousDot1) return;
+        ctx.strokeStyle = this.linkColor;
+        ctx.moveTo(previousDot1.x, previousDot1.y);
+        ctx.beginPath();
+        ctx.lineTo(this.x, this.y);
+        if (previousDot2 != false) ctx.lineTo(previousDot2.x, previousDot2.y);
+        if (previousDot3 != false) ctx.lineTo(previousDot3.x, previousDot3.y);
+        ctx.stroke();
+        ctx.closePath();
+    };
+
+    function getPreviousDot(id, stepback) {
+        if (id == 0 || id - stepback < 0) return false;
+        if (typeof dots[id - stepback] != "undefined") return dots[id - stepback];
+        else return false; //getPreviousDot(id - stepback);
+    }
+
+    Dot.prototype.move = function () {
+        this.a -= this.aReduction;
+        if (this.a <= 0) {
+        this.die();
+        return;
+        }
+        this.color = "rgba(255,255,255," + this.a + ")";
+        this.linkColor = "rgba(255,255,255," + this.a / 4 + ")";
+        (this.x = this.x + Math.cos(degToRad(this.dir)) * this.speed),
+        (this.y = this.y + Math.sin(degToRad(this.dir)) * this.speed);
+
+        this.draw();
+        this.link();
+    };
+
+    Dot.prototype.die = function () {
+        dots[this.id] = null;
+        delete dots[this.id];
+    };
+
+    var canvas = document.getElementById("canvas"),
+        ctx = canvas.getContext("2d"),
+        WIDTH,
+        HEIGHT,
+        mouseMoving = false,
+        mouseMoveChecker,
+        mouseX,
+        mouseY,
+        stars = [],
+        initStarsPopulation = 80,
+        dots = [],
+        dotsMinDist = 2,
+        maxDistFromCursor = 50;
+
+    setCanvasSize();
+    init();
+
+    function setCanvasSize() {
+        (WIDTH = document.documentElement.clientWidth),
+        (HEIGHT = document.documentElement.clientHeight);
+
+        canvas.setAttribute("width", WIDTH);
+        canvas.setAttribute("height", HEIGHT);
+    }
+
+    function init() {
+        // 设置画笔颜色和阴影颜色
+        ctx.strokeStyle = "white";
+        ctx.shadowColor = "white";
+        for (var i = 0; i < initStarsPopulation; i++) {
+            stars[i] = new Star(
+                i,
+                Math.floor(Math.random() * WIDTH),
+                Math.floor(Math.random() * HEIGHT)
+            );
+            stars[i].draw();
+        }
+        ctx.shadowBlur = 0;
+        animate();
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+        for (var i in stars) {
+        stars[i].move();
+        }
+        for (var i in dots) {
+        dots[i].move();
+        }
+        drawIfMouseMoving();
+        requestAnimationFrame(animate);
+    }
+
+    window.onmousemove = function (e) {
+        mouseMoving = true;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        clearInterval(mouseMoveChecker);
+        mouseMoveChecker = setTimeout(function () {
+        mouseMoving = false;
+        }, 100);
+    };
+
+    function drawIfMouseMoving() {
+        if (!mouseMoving) return;
+
+        if (dots.length == 0) {
+        dots[0] = new Dot(0, mouseX, mouseY);
+        dots[0].draw();
+        return;
+        }
+
+        var previousDot = getPreviousDot(dots.length, 1);
+        var prevX = previousDot.x;
+        var prevY = previousDot.y;
+
+        var diffX = Math.abs(prevX - mouseX);
+        var diffY = Math.abs(prevY - mouseY);
+
+        if (diffX < dotsMinDist || diffY < dotsMinDist) return;
+
+        var xVariation = Math.random() > 0.5 ? -1 : 1;
+        xVariation =
+        xVariation * Math.floor(Math.random() * maxDistFromCursor) + 1;
+        var yVariation = Math.random() > 0.5 ? -1 : 1;
+        yVariation =
+        yVariation * Math.floor(Math.random() * maxDistFromCursor) + 1;
+        dots[dots.length] = new Dot(
+        dots.length,
+        mouseX + xVariation,
+        mouseY + yVariation
+        );
+        dots[dots.length - 1].draw();
+        dots[dots.length - 1].link();
+    }
+
+    function degToRad(deg) {
+        return deg * (Math.PI / 180);
+    }
+</script>
+<script src="style/js/music.js"></script>
+<script src="style/js/cloudLable.js"></script>
 </html>

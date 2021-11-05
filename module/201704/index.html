@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>流星雨3D旋转相册</title>
+    <title>壹柒过清明</title>
     <link rel="stylesheet" href="style.css" />
     <style>
       * {
@@ -96,7 +96,7 @@
   </head>
   <body>
     <audio id="mymusic" autoplay="autopaly">
-      <source src="renxi.mp3" type="audio/mp3" />
+      <source src="luguorenjian.mp3" type="audio/mp3" />
     </audio>
 
     <!-- 相册 -->
@@ -473,17 +473,18 @@
       })(this, document);
     </script>
 
-        <script type="text/javascript">
-        window.onload = function(){
-            setInterval("toggleSound()", 100)
+<script type="text/javascript">
+    window.onload = function(){
+        setInterval("toggleSound()", 100)
+    }
+
+    function toggleSound() {
+        var music = document.getElementById("mymusic");
+        if (music.paused) {
+            music.paused=false;
+            music.play();
         }
-        function toggleSound() {
-            var music = document.getElementById("mymusic");
-            if (music.paused) {
-                music.paused=false;
-                music.play();
-            }
-        }
-    </script>
+    }
+</script>
   </body>
 </html>

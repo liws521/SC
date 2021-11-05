@@ -18,6 +18,7 @@
         height: 100%;
         cursor: none;
         background: black;
+        /* 设置背景的渐变色 */
         background: linear-gradient(to bottom, #000000 0%, #5788fe 100%);
       }
 
@@ -230,36 +231,38 @@
     <!-- 音乐 -->
     <audio id="myAudio" src="music/yinyue.mp3" autoplay></audio>
   
-  </body>
+</body>
 
-  <script>
-    function Star(id, x, y) {
-      this.id = id;
-      this.x = x;
-      this.y = y;
-      this.r = Math.floor(Math.random() * 2) + 1;
-      var alpha = (Math.floor(Math.random() * 10) + 1) / 10 / 2;
-      this.color = "rgba(255,255,255," + alpha + ")";
+<script>
+    // 天空中的小星星, 类与对象
+    function Star(id, x, y){
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.r = Math.floor(Math.random() * 2) + 1;
+        var alpha = (Math.floor(Math.random() * 10) + 1) / 10 / 2;
+        this.color = "rgba(255,255,255," + alpha + ")";
     }
 
-    Star.prototype.draw = function () {
-      ctx.fillStyle = this.color;
-      ctx.shadowBlur = this.r * 2;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-      ctx.closePath();
-      ctx.fill();
+    // 利用原型对象可以给对象添加新的属性和方法
+    Star.prototype.draw = function(){
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = this.r * 2;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
     };
 
     Star.prototype.move = function () {
-      this.y -= 0.15;
-      if (this.y <= -10) this.y = HEIGHT + 10;
-      this.draw();
+        this.y -= 0.15;
+        if (this.y <= -10) this.y = HEIGHT + 10;
+        this.draw();
     };
 
     Star.prototype.die = function () {
-      stars[this.id] = null;
-      delete stars[this.id];
+        stars[this.id] = null;
+        delete stars[this.id];
     };
 
     function Dot(id, x, y, r) {
@@ -354,15 +357,16 @@
     }
 
     function init() {
-      ctx.strokeStyle = "white";
-      ctx.shadowColor = "white";
-      for (var i = 0; i < initStarsPopulation; i++) {
-        stars[i] = new Star(
-          i,
-          Math.floor(Math.random() * WIDTH),
-          Math.floor(Math.random() * HEIGHT)
-        );
-        //stars[i].draw();
+        // 设置画笔颜色和阴影颜色
+        ctx.strokeStyle = "white";
+        ctx.shadowColor = "white";
+        for (var i = 0; i < initStarsPopulation; i++) {
+            stars[i] = new Star(
+                i,
+                Math.floor(Math.random() * WIDTH),
+                Math.floor(Math.random() * HEIGHT)
+            );
+            stars[i].draw();
       }
       ctx.shadowBlur = 0;
       animate();

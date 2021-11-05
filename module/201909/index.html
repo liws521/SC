@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>常州恐龙园</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style0.css" />
+    <link rel="stylesheet" href="css/music.css" />
+  </head>
+
+  <body>
+    <!-- 荧光S -->
+    <div class="container">
+      <!-- 打字 -->
+      <div class="typing">
+        <!-- 字幕 -->
+        <h2 class="header-sub-title" id="word"></h2>
+        <h2 class="header-sub-title blink">|</h2>
+      </div>
+
+      <!-- 相册 -->
+      <div class="box">
+        <ul class="minbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <ol class="maxbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 播放器 -->
+    <div id="app">
+        <div class="container_player">
+        <div class="music-box">
+            <!-- <img src="images/avatar.jpg" /> -->
+            <img src="images/01.jpg" />
+            <div class="mask">
+            <div class="mplayer" onclick="play()">
+                <i class="fa">
+                <span class="before"></span>
+                <span class="after"> </span>
+                </i>
+                <svg
+                class="loadingSvg"
+                width="25"
+                height="25"
+                viewBox="0,0,50,50"
+                style="
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                "
+                >
+                <circle></circle>
+                </svg>
+            </div>
+            <div class="m-circle m-progress">
+                <svg width="163" height="163" viewBox="0,0,163,163">
+                <circle
+                    cx="81"
+                    cy="81"
+                    r="159"
+                    stroke-width="8"
+                    stroke="rgba(255, 206, 113, 0.2)"
+                    fill="rgba(0,0,0,.2)"
+                ></circle>
+                <circle
+                    class="a"
+                    cx="81"
+                    cy="81"
+                    r="159"
+                    stroke-width="6"
+                    stroke="rgba(255, 206, 113, 1)"
+                    fill="none"
+                    stroke-dasharray="0 999"
+                    transform="matrix(0,-1,1,0,0,163)"
+                ></circle>
+                </svg>
+            </div>
+            <div class="m_time">
+                <span class="mplayer_curtime">00:00</span>
+                <span class="m-join">/</span>
+                <span class="mplayer_durtime">00:00</span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- 音乐 -->
+    <audio id="myAudio" src="mp3/xiaojiuwo.mp3" autoplay></audio>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/music.js"></script>
+
+    <script>
+      /* 兼容H5 手机端 */
+      if (
+        navigator.userAgent.match(
+          /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        )
+      ) {
+        var box = document.querySelectorAll(".box")[0];
+        console.log(box, "移动端");
+        box.style.left = "42%";
+      }
+      // --------------------打印字 S--------------------------
+      const words = [
+        "❤ 2019年9月, 大四上",
+        "❤ 终于和小赵走出南京了, 嘿嘿",
+        "❤ 一起去了常州恐龙园",
+        "❤ 明明买的是两个车号的高铁",
+        "❤ 却坐上了同一辆车, 甚至同一节车厢",
+        "❤ 下车时才发现彼此",
+        "❤ 还遇上了化工厂大火, 漫天黑烟",
+        "❤ 恐龙园^o^~",
+      ];
+      let PPP = 0;
+      let timer;
+      // speed in ms
+      let deleteDelay = 3000;
+      let typeSpeed = 100;
+      let delSpeed = 50;
+      /* 开始编写文字 */
+      function typingEffect() {
+        console.log(i, "iiii");
+        console.log(words[PPP], "words[i]");
+        let word = words[PPP].split("");
+        var loopTyping = function () {
+          if (word.length > 0) {
+            document.getElementById("word").innerHTML += word.shift();
+          } else {
+            delay(function () {
+              deletingEffect(); // do stuff
+            }, deleteDelay); // end delay
+            // deletingEffect();
+            return false;
+          }
+          timer = setTimeout(loopTyping, typeSpeed);
+        };
+        loopTyping();
+      }
+
+      function deletingEffect() {
+        let word = words[PPP].split("");
+        var loopDeleting = function () {
+          if (word.length > 0) {
+            word.pop();
+            document.getElementById("word").innerHTML = word.join("");
+          } else {
+            if (words.length > PPP + 1) {
+              PPP++;
+            } else {
+              PPP = 0;
+            }
+            typingEffect();
+            return false;
+          }
+
+          timer = setTimeout(loopDeleting, delSpeed);
+        };
+
+        loopDeleting();
+      }
+
+      var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+          clearTimeout(timer);
+          timer = setTimeout(callback, ms);
+        };
+      })();
+      typingEffect();
+      // --------------------打印字 E--------------------------
+    </script>
+  </body>
+</html>

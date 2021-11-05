@@ -1,6 +1,6 @@
-var radius = 120;
+var radius = 150;
 var dtr = Math.PI/180;
-var d=300;
+var cloudLable_d=300;
 var mcList = [];
 var active = false;
 var lasta = 1;
@@ -9,8 +9,8 @@ var distr = true;
 var tspeed=10;
 var size=250;
 
-var mouseX=0;
-var mouseY=0;
+var mX=0;
+var mY=0;
 
 var howElliptical=1;
 
@@ -22,10 +22,11 @@ window.onload=function ()
     var i=0;
     var oTag=null;
 
+    // 拿到tagsList
     oDiv=document.getElementById('tagsList');
-
+    // 所有超链接
     aA=oDiv.getElementsByTagName('a');
-
+    // 
     for(i=0;i<aA.length;i++)
     {
         oTag={};
@@ -54,11 +55,10 @@ window.onload=function ()
     {
         var oEvent=window.event || ev;
 
-        mouseX=oEvent.clientX-(oDiv.offsetLeft+oDiv.offsetWidth/2);
-        mouseY=oEvent.clientY-(oDiv.offsetTop+oDiv.offsetHeight/2);
-
-        mouseX/=5;
-        mouseY/=5;
+        mX=oEvent.clientX-(oDiv.offsetLeft+oDiv.offsetWidth/2);
+        mY=oEvent.clientY-(oDiv.offsetTop+oDiv.offsetHeight/2);
+        mX/=5;
+        mY/=5;
     };
 
     setInterval(update, 30);
@@ -71,8 +71,8 @@ function update()
 
     if(active)
     {
-        a = (-Math.min( Math.max( -mouseY, -size ), size ) / radius ) * tspeed;
-        b = (Math.min( Math.max( -mouseX, -size ), size ) / radius ) * tspeed;
+        a = (-Math.min( Math.max( -mY, -size ), size ) / radius ) * tspeed;
+        b = (Math.min( Math.max( -mX, -size ), size ) / radius ) * tspeed;
     }
     else
     {
@@ -82,6 +82,7 @@ function update()
 
     lasta=a;
     lastb=b;
+
 
     if(Math.abs(a)<=0.01 && Math.abs(b)<=0.01)
     {
@@ -108,7 +109,7 @@ function update()
         mcList[j].cy=ry3;
         mcList[j].cz=rz3;
 
-        per=d/(d+rz3);
+        per=cloudLable_d/(cloudLable_d+rz3);
 
         mcList[j].x=(howElliptical*rx3*per)-(howElliptical*2);
         mcList[j].y=ry3*per;

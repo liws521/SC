@@ -1,5 +1,6 @@
-#tagsList { position: relative; width:370px; height:300px; }
+#tagsList { position:fixed; top:30%; left:30%; width:500px; height:500px; z-index:999999999999999;}
+/* #tagsList { position: relative; width:370px; height:300px; z-index:999999999999999;} */
 #tagsList a { position: absolute; top: 0px; left: 0px;
-    font-family: Microsoft YaHei; color: #24313D; 
+    font-family: Microsoft YaHei; color: #f4fcf8; 
     font-weight: bold; text-decoration: none; padding: 3px 6px; }
 #tagsList a:hover { color: #2C6578; letter-spacing: 2px; }
