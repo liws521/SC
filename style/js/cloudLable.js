@@ -226,8 +226,8 @@ function doPosition()
     }
 }
 
-function sineCosine( a, b, c)
-{
+/* 计算abc的sin/cos, e.g. a=30, sa=sin(a * pi / 180)=0.5 */
+function sineCosine(a, b, c) {
     sa = Math.sin(a * dtr);
     ca = Math.cos(a * dtr);
     sb = Math.sin(b * dtr);

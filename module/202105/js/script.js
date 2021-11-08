@@ -12,12 +12,14 @@ const CELL_REPAINT_INTERVAL = [
   500, // to
 ];
 
-const BG_COLOR = "#003349";
+// const BG_COLOR = "#003349";
+const BG_COLOR = "red";
 const BORDER_COLOR = "#002B3D";
 /* 字体颜色 */
+// const CELL_HIGHLIGHT = "#3DE3C9";
 const CELL_HIGHLIGHT = "#3DE3C9";
 const ELECTRON_COLOR = "#3DE3C9";
-const FONT_COLOR = "#3DE3C9";
+const FONT_COLOR = "#ffffff";
 
 const FONT_FAMILY = '"Helvetica Neue", Arial, sans-serif';
 
@@ -865,7 +867,7 @@ shape.init();
 shape.print("❤ ");
 
 /* 只需要修改这里的文字就行 */
-let arr = ["2021","五一","园博园"];
+let arr = ["2021年五一","饱受实验折磨的小赵","还是没能逃脱南京的魔爪","南京园博园","黑马世界漫画博物馆", "先锋书店"];
 let i = -1;
 let time = setInterval(() => {
   if (i != arr.length - 1) {

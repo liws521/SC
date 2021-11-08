@@ -18,18 +18,18 @@ body {
 li {
   list-style: none;
 }
-
 .box {
-  z-index: 999999 !important;
   width: 200px;
   height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
-  position: fixed !important;
-  top: 42%;
-  left: 40%;
+  position: absolute;
+  /* margin-left: 42%; */
+  /* margin-top: 40%; */
+  top: 50%;
+  left: 50%;
   -webkit-transform-style: preserve-3d;
   -webkit-transform: rotateX(13deg);
   -webkit-animation: move 5s linear infinite;
@@ -48,53 +48,58 @@ li {
   position: absolute;
   left: 0;
   top: 0;
+  /* 背景颜色 */
+  background-color: rgb(0, 183, 255);
+  /* opacity: 0.45; */
+  outline: rgb(40, 226, 240) solid thick;
+  box-shadow: rgba(17, 123, 194, 0.712) 0 0 50px 50px;
 }
 .minbox li:nth-child(1) {
-  background: url(../img/01.jpg) no-repeat 0 0;
+  background: url(../images/01.jpg) no-repeat 0 0;
   -webkit-transform: translateZ(50px);
 }
 .minbox li:nth-child(2) {
-  background: url(../img/02.jpg) no-repeat 0 0;
+  background: url(../images/02.jpg) no-repeat 0 0;
   -webkit-transform: rotateX(180deg) translateZ(50px);
 }
 .minbox li:nth-child(3) {
-  background: url(../img/03.jpg) no-repeat 0 0;
+  background: url(../images/03.jpg) no-repeat 0 0;
   -webkit-transform: rotateX(-90deg) translateZ(50px);
 }
 .minbox li:nth-child(4) {
-  background: url(../img/04.jpg) no-repeat 0 0;
+  background: url(../images/04.jpg) no-repeat 0 0;
   -webkit-transform: rotateX(90deg) translateZ(50px);
 }
 .minbox li:nth-child(5) {
-  background: url(../img/05.jpg) no-repeat 0 0;
+  background: url(../images/05.jpg) no-repeat 0 0;
   -webkit-transform: rotateY(-90deg) translateZ(50px);
 }
 .minbox li:nth-child(6) {
-  background: url(../img/06.jpg) no-repeat 0 0;
+  background: url(../images/06.jpg) no-repeat 0 0;
   -webkit-transform: rotateY(90deg) translateZ(50px);
 }
 .maxbox li:nth-child(1) {
-  background: url(../img/1.jpg) no-repeat 0 0;
+  background: url(../images/1.jpg) no-repeat 0 0;
   -webkit-transform: translateZ(50px);
 }
 .maxbox li:nth-child(2) {
-  background: url(../img/2.jpg) no-repeat 0 0;
+  background: url(../images/2.jpg) no-repeat 0 0;
   -webkit-transform: translateZ(50px);
 }
 .maxbox li:nth-child(3) {
-  background: url(../img/3.jpg) no-repeat 0 0;
+  background: url(../images/3.jpg) no-repeat 0 0;
   -webkit-transform: rotateX(-90deg) translateZ(50px);
 }
 .maxbox li:nth-child(4) {
-  background: url(../img/4.jpg) no-repeat 0 0;
+  background: url(../images/4.jpg) no-repeat 0 0;
   -webkit-transform: rotateX(90deg) translateZ(50px);
 }
 .maxbox li:nth-child(5) {
-  background: url(../img/5.jpg) no-repeat 0 0;
+  background: url(../images/5.jpg) no-repeat 0 0;
   -webkit-transform: rotateY(-90deg) translateZ(50px);
 }
 .maxbox li:nth-child(6) {
-  background: url(../img/6.jpg) no-repeat 0 0;
+  background: url(../images/6.jpg) no-repeat 0 0;
   -webkit-transform: rotateY(90deg) translateZ(50px);
 }
 .maxbox {
@@ -189,39 +194,4 @@ li {
   100% {
     -webkit-transform: rotateX(13deg) rotateY(360deg);
   }
-}
-/* 雪花css */
-.snowLayer {
-  position: absolute;
-  left: -400px;
-  top: -400px;
-  height: 2000px !important;
-  overflow: hidden;
-}
-.blink {
-  animation: blink 0.5s infinite;
-  animation-delay: 500ms;
-}
-
-@keyframes blink {
-  to {
-    opacity: 0;
-  }
-}
-
-.typing {
-  display: flex;
-  top: 10%;
-  left: 4%;
-  z-index: 999999 !important;
-  position: fixed !important;
-}
-
-.header-sub-title,
-h2 {
-  font-weight: 600;
-  font-size: 40px;
-  color: skyblue;
-  padding-right: 0.1em;
-  text-transform: uppercase;
 }

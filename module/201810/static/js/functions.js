@@ -28,10 +28,10 @@ var s = setInterval(function() {
                 img.setAttribute('src', './static/image/' +Math.round(Math.random() * 28) + '.jpg');
              
 
-            }, 1000);
-        }, 1000);
-    }, 1000);
-}, 4500);
+            }, 2000);
+        }, 2000);
+    }, 2000);
+}, 9000);
 
 // 生成虚拟数据 ----- 勿删-----
 // for (var i = 0; i < 199; i++) {

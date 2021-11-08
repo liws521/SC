@@ -3,11 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <script src="style/js/jquery.min.js" ></script>
-    <!-- <script
-      id="jqbb"
-      src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"
-    ></script> -->
-    <!-- 音乐播放器css -->
+    <!-- css -->
     <link rel="stylesheet" href="style/css/music.css" />
     <link rel="stylesheet" href="style/css/cloudLabel.css" />
     <style type="text/css">
@@ -64,6 +60,7 @@
         color: hsl(350, 100%, 88%);
         }
     </style>\
+
     <!-- 图片+调用插件形成白色雪花 -->
     <script type="text/javascript" src="style/js/christmassnow.js"></script>
     <script>
@@ -78,6 +75,7 @@
         });
         });
     </script>
+
 </head>
 
 <body>
@@ -124,7 +122,7 @@
     <!-- 白雪花飘落 -->
     <div class="drop"></div>
 
-    <!-- 星空 -->
+    <!-- 星空背景 -->
     <div class="landscape"></div>
     <div class="filter"></div>
     <canvas id="canvas"></canvas>
@@ -134,7 +132,7 @@
         <div class="container_player">
         <div class="music-box">
             <!-- <img src="images/avatar.jpg" /> -->
-            <img src="img/01.png" />
+            <img src="style/images/01.jpg" />
             <div class="mask">
             <div class="mplayer" onclick="play()">
                 <i class="fa">
@@ -189,34 +187,59 @@
         </div>
     </div>
     <!-- 音乐 -->
-    <audio id="myAudio" src="style/mp3/yinyue.mp3" autoplay></audio>
+    <audio id="myAudio" src="style/mp3/luguorenjian.mp3" ></audio>
 
+    <!--music设定为自动播放, 然后当点击超链接时, 在新标签页打开并关闭主页的音乐播放, 不然太吵了-->
     <div id="tagsList">
         <!--高中-->
-        <a href="module/ttdhy/index.html" target="_blank" >嘘~我们来偷偷地合影</a>
-        <a href="module/ouyu/index.html" target="_blank" >偶遇</a>
-        <a href="module/201512/index.html" target="_blank" >2015年的最后一天</a>
+        <!--12wall + 豆浆油条-->
+        <a href="module/ttdhy/index.html" target="_blank" onclick="pause()" >嘘~我们来偷偷地合影</a>
+        <!--bg+typing + 小酒窝-->
+        <a href="module/ouyu/index.html" target="_blank" onclick="pause()" >偶遇</a>
+        <!--雪花圣诞 + mp3-->
+        <a href="module/201512/index.html" target="_blank" onclick="pause()" >2015年的最后一天</a>
+
         <!--2016-->
-        <a href="module/201606/index.html" target="_blank" >我们高考啦</a>
-        <a href="module/201610/index.html" target="_blank" >壹陆我拾忆</a>
-        <a href="module/201612/index.html" target="_blank" >来约一场你的名字吧</a>
+        <!--bg+typing + 北京东路的日子-->
+        <a href="module/201606/index.html" target="_blank" onclick="pause()" >我们高考啦</a>
+        <!--many imgs + 有点甜-->
+        <a href="module/201610/index.html" target="_blank" onclick="pause()" >壹陆我拾忆</a>
+        <!--bg+typing + 遇见你的时候所有星星都落到我头上-->
+        <a href="module/201612/index.html" target="_blank" onclick="pause()" >来约一场你的名字吧</a>
+        
         <!--2017-->
-        <a href="module/201704/index.html" target="_blank" >壹柒过清明</a>
-        <a href="module/201705/index.html" target="_blank" >壹柒的吾忆</a>
+        <!--飘雪 + 雪落下的声音-->
+        <a href="module/201701/index.html" target="_blank" onclick="pause()" >元旦of2017</a>
+        <!--3D10 + 樱花草-->
+        <a href="module/201704/index.html" target="_blank" onclick="pause()" >壹柒过清明</a>
+        <!--3D10 + 暖暖-->
+        <a href="module/201705/index.html" target="_blank" onclick="pause()" >壹柒的吾忆</a>
+        
         <!--2018-->
-        <a href="module/201808/index.html" target="_blank" >人在囧途</a>
-        <a href="module/201810/index.html" target="_blank" >时间煮雨</a>
+        <!--321+风中落叶 + mp3-->
+        <a href="module/201808/index.html" target="_blank" onclick="pause()" >人在囧途</a>
+        <!--many imgs + 时间煮雨-->
+        <a href="module/201810/index.html" target="_blank" onclick="pause()" >时间煮雨</a>
+        
         <!--2019-->
-        <a href="module/201904/index.html" target="_blank" >固城湖水漫城</a>
-        <a href="module/201909/index.html" target="_blank" >常州恐龙园</a>
+        <!--saysomeing + 恋爱ing-->
+        <a href="module/201904/index.html" target="_blank" onclick="pause()" >固城湖水漫城</a>
+        <!--bg+typing + 我多喜欢你你会知道-->
+        <a href="module/201909/index.html" target="_blank" onclick="pause()" >常州恐龙园</a>
+        
         <!--2020-->
-        <a href="module/202007/index.html" target="_blank" >下次苏州见</a>
-        <a href="module/202008/index.html" target="_blank" >宜家&苏州</a>
+        <!--bg+typing + 想见你-->
+        <a href="module/202007/index.html" target="_blank" onclick="pause()" >下次苏州见</a>
+        <!--荧光+白云 + 甜甜的-->
+        <a href="module/202008/index.html" target="_blank" onclick="pause()" >宜家&苏州</a>
+        
         <!--2021-->
-        <a href="module/202105/index.html" target="_blank" >园博园</a>
+        <!--荧光+樱花 + 万有引力-->
+        <a href="module/202105/index.html" target="_blank" onclick="pause()" >园博园</a>
+        
         <!--others-->
-        <a href="module/HappyBirthday/index.html" target="_blank" >HappyBirthday</a>
-        <a href="module/longlongago/index.html" target="_blank" >long-long-ago</a>
+        <a href="module/HappyBirthday/index.html" target="_blank" onclick="pause()" >HappyBirthday</a>
+        <!-- <a href="module/longlongago/index.html" target="_blank" onclick="pause()" >long-long-ago</a> -->
     </div>
 </body>
 
@@ -420,6 +443,8 @@
         return deg * (Math.PI / 180);
     }
 </script>
+
 <script src="style/js/music.js"></script>
 <script src="style/js/cloudLable.js"></script>
+
 </html>

@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8" />
-  <title></title>
+  <title>园博园</title>
   <script src="js/jquery.min.js"></script>
-  <script src="js/mymusic.js"></script>
   <link type="text/css" href="./css/style.css" rel="stylesheet" />
+  <link type="text/css" href="./css/music.css" rel="stylesheet" />
   <style>
     html,
     body {
@@ -42,9 +42,69 @@
 </head>
 
 <body>
-  <audio autoplay="autopaly" id="mymusic">
-    <source src="zmdty.mp3" type="audio/mp3" />
-  </audio>
+
+    <!-- 播放器 -->
+    <div id="app">
+        <div class="container_player">
+        <div class="music-box">
+            <!-- <img src="images/avatar.jpg" /> -->
+            <img src="img/01.jpg" />
+            <div class="mask">
+            <div class="mplayer" onclick="play()">
+                <i class="fa">
+                <span class="before"></span>
+                <span class="after"> </span>
+                </i>
+                <svg
+                class="loadingSvg"
+                width="25"
+                height="25"
+                viewBox="0,0,50,50"
+                style="
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                "
+                >
+                <circle></circle>
+                </svg>
+            </div>
+            <div class="m-circle m-progress">
+                <svg width="163" height="163" viewBox="0,0,163,163">
+                <circle
+                    cx="81"
+                    cy="81"
+                    r="159"
+                    stroke-width="8"
+                    stroke="rgba(255, 206, 113, 0.2)"
+                    fill="rgba(0,0,0,.2)"
+                ></circle>
+                <circle
+                    class="a"
+                    cx="81"
+                    cy="81"
+                    r="159"
+                    stroke-width="6"
+                    stroke="rgba(255, 206, 113, 1)"
+                    fill="none"
+                    stroke-dasharray="0 999"
+                    transform="matrix(0,-1,1,0,0,163)"
+                ></circle>
+                </svg>
+            </div>
+            <div class="m_time">
+                <span class="mplayer_curtime">00:00</span>
+                <span class="m-join">/</span>
+                <span class="mplayer_durtime">00:00</span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- 音乐 -->
+    <audio id="myAudio" src="mp3/wanyouyinli.mp3" autoplay></audio>
+
   <div id="jsi-cherry-container" class="container">
 
     <div class="box">
@@ -385,4 +445,5 @@
   </script>
 </body>
 
+<script src="js/music.js"></script>
 </html>

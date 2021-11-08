@@ -5,14 +5,15 @@ var circle = $(".m-circle .a")[0];
 var circumference = 2 * Math.PI * 160;
 var timer_audio;
 
+// 页面加载完自动播放音乐
 $(function(){
         // setInterval("play2()", 100)
-        setTimeout("play2()", 2000)
+        setTimeout("autoplay()", 2000)
     }
 )
 
-function play2() {
-//   if (audio.paused) {
+// 无论状态如何, 强制播放音乐
+function autoplay() {
     audio.paused = false;
     audio.play();
     $(".music-box").addClass("mplaying");
@@ -32,24 +33,29 @@ function play2() {
         );
       }
     }, 100);
-//   }
-  // } else {
-  //   audio.pause();
-  //   $(".music-box").removeClass("mplaying");
-  // }
 }
 
+function pause() {
+    audio.pause();
+    $(".music-box").removeClass("mplaying");
+}
+
+// paused <-> play 互相转换的开关
 function play() {
   if (audio.paused) {
     audio.paused = false;
     audio.play();
+    // mplaying是个表示播放中的伪类
     $(".music-box").addClass("mplaying");
+    // 每100ms更新一次
     timer_audio = setInterval(() => {
       if (audio.ended) {
+        // 如果播放结束了
         $(".music-box").removeClass("mplaying");
         currentTime.text("00:00");
         circle.setAttribute("stroke-dasharray", "0 999");
       } else {
+        // 正在播放中
         currentTime.text(formatTime(audio.currentTime));
         durationTime.text(formatTime(audio.duration));
         var step = circumference / audio.duration;
@@ -61,6 +67,7 @@ function play() {
       }
     }, 100);
   } else {
+    // 如果正在播放, 则pause
     audio.pause();
     $(".music-box").removeClass("mplaying");
   }
